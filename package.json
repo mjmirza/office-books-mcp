@@ -1,0 +1,38 @@
+{
+  "name": "office-books-mcp",
+  "version": "0.0.1",
+  "description": "MCP server for Lexware Office bookkeeping: contacts, invoices, vouchers and articles, with a preview and your approval before any write. Independent, not affiliated with Lexware or Haufe.",
+  "type": "module",
+  "license": "SEE LICENSE IN LICENSE",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "bin": {
+    "office-books-mcp": "dist/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc && chmod +x dist/index.js",
+    "typecheck": "tsc --noEmit",
+    "test": "tsx --test test/unit/*.test.ts",
+    "test:live": "tsx test/live.ts"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "fast-check": "^4.10.2",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  },
+  "publishConfig": {
+    "provenance": true
+  },
+  "private": true
+}
