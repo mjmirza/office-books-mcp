@@ -49,7 +49,7 @@ const VOUCHER_TYPES = [
   "deliverynote",
 ] as const;
 
-const VOUCHER_STATUS = ["any", "draft", "open", "overdue", "paid", "paidoff", "voided", "transferred", "sepadebit", "accepted", "rejected"] as const;
+const VOUCHER_STATUS = ["any", "draft", "open", "overdue", "paid", "paidoff", "voided", "transferred", "sepadebit", "accepted", "rejected", "unchecked"] as const;
 
 function def<S extends z.ZodRawShape>(t: {
   name: string;
@@ -107,7 +107,8 @@ export const readTools: ReadTool[] = [
     description: "List products and services from the article catalogue.",
     input: {
       page,
-      size,
+      // Lexware rejects article page sizes below 25 with HTTP 406 (verified live 2026-11-13).
+      size: z.number().int().min(25).max(250).optional().describe("Page size, 25 to 250, Lexware default 25"),
       articleNumber: z.string().optional(),
       gtin: z.string().optional(),
       type: z.enum(["PRODUCT", "SERVICE"]).optional(),

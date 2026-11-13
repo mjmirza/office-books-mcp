@@ -56,6 +56,13 @@ test("list_contacts rejects a page size above Lexware's maximum", () => {
   assert.equal(tool("list_contacts").input.safeParse({ size: 500 }).success, false);
 });
 
+test("list_articles enforces Lexware's minimum page size of 25 (live 406 on 2026-11-13)", () => {
+  const input = tool("list_articles").input;
+  assert.equal(input.safeParse({ size: 5 }).success, false);
+  assert.equal(input.safeParse({ size: 25 }).success, true);
+  assert.equal(input.safeParse({}).success, true);
+});
+
 test("get_sales_document maps each type to its endpoint", async () => {
   const r = recorder();
   for (const type of ["invoice", "credit_note", "quotation", "dunning"] as const) {
@@ -75,6 +82,10 @@ test("list_vouchers requires type and status and joins lists with commas", async
   assert.equal(r.calls[0]?.path, "/v1/voucherlist");
   assert.equal(r.calls[0]?.opts?.query?.voucherType, "invoice,creditnote");
   assert.equal(r.calls[0]?.opts?.query?.voucherStatus, "open");
+});
+
+test("list_vouchers accepts the 'unchecked' status (Lexware changelog 2024-08-01)", () => {
+  assert.equal(tool("list_vouchers").input.safeParse({ voucherType: ["purchaseinvoice"], voucherStatus: ["unchecked"] }).success, true);
 });
 
 test("get_reference_data only reaches the four reference endpoints", async () => {
