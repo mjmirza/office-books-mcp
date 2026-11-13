@@ -15,7 +15,9 @@ Ask your AI assistant about your Lexware Office books, safely.
 
 ## From install to first answer
 
-1. In Lexware Office (XL plan), open **Einstellungen, Public API** and create an API key.
+1. In Lexware Office (XL plan), create an API key. The [step-by-step guide with screenshots](docs/SETUP.md) shows every click.
+
+   ![Create the key](https://raw.githubusercontent.com/mjmirza/office-books-mcp/main/assets/setup/05-name-and-terms.png)
 2. Build the server.
    ```bash
    npm install && npm run build
