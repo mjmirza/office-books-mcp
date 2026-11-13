@@ -1,10 +1,18 @@
+<div align="center">
+
+<img src="https://raw.githubusercontent.com/mjmirza/office-books-mcp/main/assets/lexware-logo.png" alt="Lexware" height="40" />
+
 # office-books-mcp
 
 Ask your AI assistant about your Lexware Office books, safely.
 
-![License](https://img.shields.io/badge/license-source--available-orange) ![Node](https://img.shields.io/badge/node-%3E%3D22-green) ![Status](https://img.shields.io/badge/status-read--only%20preview-yellow)
+![License](https://img.shields.io/badge/license-source--available-orange) ![Node](https://img.shields.io/badge/node-%3E%3D22-339933?logo=nodedotjs&logoColor=white) ![MCP](https://img.shields.io/badge/MCP-server-000000) ![Status](https://img.shields.io/badge/status-read--only%20preview-yellow) ![Tests](https://img.shields.io/badge/tests-30%20unit%20%2B%2014%20live-2ea44f)
 
-> Independent project. Not affiliated with, endorsed by, or sponsored by Lexware GmbH or the Haufe Group. "Lexware Office" is used only to describe compatibility. See [docs/TRADEMARKS.md](docs/TRADEMARKS.md).
+[Star](https://github.com/mjmirza/office-books-mcp) &nbsp;|&nbsp; [Sponsor](https://github.com/sponsors/mjmirza) &nbsp;|&nbsp; [Follow on GitHub](https://github.com/mjmirza) &nbsp;|&nbsp; [next8n.com](https://next8n.com)
+
+<sub>The Lexware logo above is a trademark of Lexware GmbH (Haufe Group), shown only to identify the service this tool connects to. This project is independent and is not affiliated with, endorsed by, or sponsored by Lexware GmbH or the Haufe Group, and claims no rights to the logo. Answers are not tax advice. Full disclaimer in <a href="docs/TRADEMARKS.md">docs/TRADEMARKS.md</a>.</sub>
+
+</div>
 
 ## What you get
 

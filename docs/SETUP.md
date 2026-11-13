@@ -2,7 +2,7 @@
 
 About five minutes. You need Lexware Office with the XL plan (the free 30-day trial includes it) and Node 22 or newer.
 
-> Screenshots were taken on 2026-11-13 in a Lexware Office XL trial. Personal data is blurred, and the Lexware logo is blurred because the Lexware API terms do not allow its use without consent.
+> Screenshots were taken on 2026-11-13 in a Lexware Office XL trial. Personal data is blurred. Lexware screens and the Lexware logo belong to Lexware GmbH, see [TRADEMARKS.md](TRADEMARKS.md).
 
 ## 1. Open Erweiterungen
 
