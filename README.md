@@ -14,6 +14,20 @@ Ask your AI assistant about your Lexware Office books, safely.
 
 </div>
 
+> **Lexware has an official MCP server.** Since autumn 2026 Lexware runs its own hosted Lexware Office MCP server for Claude and ChatGPT, with OAuth login, read and write access and a GoBD action log, included in the XL plan. For most people that is the right choice, see [lexware.de/funktionen/lexware-mcp](https://www.lexware.de/funktionen/lexware-mcp/).
+>
+> office-books-mcp is an independent alternative for people who prefer to run the connection on their own machine. It talks to the Lexware Public API directly with your own API key, works with any MCP client, and is read only, so it cannot change your books.
+
+## When to use which
+
+| | Lexware official MCP | office-books-mcp |
+|---|---|---|
+| Runs on | Lexware servers, EU/Germany | Your own machine |
+| Login | OAuth with your Lexware account | Your own Public API key |
+| Access | Read and write | Read only |
+| Clients | Claude, ChatGPT | Any MCP client (Claude Desktop, Claude Code, Cursor, others) |
+| Source | Closed | Source available, you can read every line |
+
 ## What you get
 
 - **Answers from your real books.** "Which invoices are overdue?", "What did we buy from this vendor in March?", "Show me the contact for Müller GmbH."
