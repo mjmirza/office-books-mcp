@@ -1,10 +1,32 @@
+<div align="center">
+
+<img src="https://raw.githubusercontent.com/mjmirza/office-books-mcp/main/assets/lexware-logo.png" alt="Lexware" height="40" />
+
 # office-books-mcp
 
 Ask your AI assistant about your Lexware Office books, safely.
 
-![License](https://img.shields.io/badge/license-source--available-orange) ![Node](https://img.shields.io/badge/node-%3E%3D22-green) ![Status](https://img.shields.io/badge/status-read--only%20preview-yellow)
+![License](https://img.shields.io/badge/license-source--available-orange) ![Node](https://img.shields.io/badge/node-%3E%3D22-339933?logo=nodedotjs&logoColor=white) ![MCP](https://img.shields.io/badge/MCP-server-000000) ![Status](https://img.shields.io/badge/status-read--only%20preview-yellow) ![Tests](https://img.shields.io/badge/tests-30%20unit%20%2B%2014%20live-2ea44f)
 
-> Independent project. Not affiliated with, endorsed by, or sponsored by Lexware GmbH or the Haufe Group. "Lexware Office" is used only to describe compatibility. See [docs/TRADEMARKS.md](docs/TRADEMARKS.md).
+[Star](https://github.com/mjmirza/office-books-mcp) &nbsp;|&nbsp; [Sponsor](https://github.com/sponsors/mjmirza) &nbsp;|&nbsp; [Follow on GitHub](https://github.com/mjmirza) &nbsp;|&nbsp; [next8n.com](https://next8n.com)
+
+<sub>The Lexware logo above is a trademark of Lexware GmbH (Haufe Group), shown only to identify the service this tool connects to. This project is independent and is not affiliated with, endorsed by, or sponsored by Lexware GmbH or the Haufe Group, and claims no rights to the logo. Answers are not tax advice. Full disclaimer in <a href="docs/TRADEMARKS.md">docs/TRADEMARKS.md</a>.</sub>
+
+</div>
+
+> **Lexware has an official MCP server.** Since autumn 2026 Lexware runs its own hosted Lexware Office MCP server for Claude and ChatGPT, with OAuth login, read and write access and a GoBD action log, included in the XL plan. For most people that is the right choice, see [lexware.de/funktionen/lexware-mcp](https://www.lexware.de/funktionen/lexware-mcp/).
+>
+> office-books-mcp is an independent alternative for people who prefer to run the connection on their own machine. It talks to the Lexware Public API directly with your own API key, works with any MCP client, and is read only, so it cannot change your books.
+
+## When to use which
+
+| | Lexware official MCP | office-books-mcp |
+|---|---|---|
+| Runs on | Lexware servers, EU/Germany | Your own machine |
+| Login | OAuth with your Lexware account | Your own Public API key |
+| Access | Read and write | Read only |
+| Clients | Claude, ChatGPT | Any MCP client (Claude Desktop, Claude Code, Cursor, others) |
+| Source | Closed | Source available, you can read every line |
 
 ## What you get
 
@@ -15,7 +37,9 @@ Ask your AI assistant about your Lexware Office books, safely.
 
 ## From install to first answer
 
-1. In Lexware Office (XL plan), open **Einstellungen, Public API** and create an API key.
+1. In Lexware Office (XL plan), create an API key. The [step-by-step guide with screenshots](docs/SETUP.md) shows every click.
+
+   ![Create the key](https://raw.githubusercontent.com/mjmirza/office-books-mcp/main/assets/setup/05-name-and-terms.png)
 2. Build the server.
    ```bash
    npm install && npm run build
