@@ -2,6 +2,8 @@ import { TokenBucket } from "./rate-limit.js";
 
 export const BASE_URL = "https://api.lexware.io";
 
+const API_ORIGIN = new URL(BASE_URL).origin;
+
 export type Method = "GET" | "POST" | "PUT" | "DELETE";
 
 export class LexwareApiError extends Error {
@@ -38,20 +40,32 @@ const STATUS_HINT: Record<number, string> = {
   401: "Lexware rejected the API key. Check LEXWARE_API_KEY, keys expire after at most 24 months.",
   403: "This API key may not do that. The Public API needs the Lexware Office XL plan.",
   404: "Lexware could not find that resource.",
-  406: "Lexware refused the request content type.",
+  406: "Lexware rejected the request data. A download can also get this status when the file type is not available.",
   409: "Lexware reported a conflict, usually an outdated version field. Read the resource again and retry.",
   415: "Lexware refused the request media type.",
   429: "Lexware rate limit reached (2 requests per second).",
 };
 
+function pathError(path: string): LexwareApiError {
+  return new LexwareApiError(0, `Path must start with /v1/ and stay inside the Lexware API: ${path}`);
+}
+
 function checkPath(path: string): void {
-  if (!path.startsWith("/v1/") || path.includes("..") || path.includes("//")) {
-    throw new LexwareApiError(0, `Path must start with /v1/ and stay inside the Lexware API: ${path}`);
+  // Percent-encoded ".." (%2e%2e) is still "..". new URL() would resolve it out of /v1/.
+  let decoded: string;
+  try {
+    decoded = decodeURIComponent(path);
+  } catch {
+    throw pathError(path);
+  }
+  if (!path.startsWith("/v1/") || path.includes("..") || path.includes("//") || decoded.includes("..") || decoded.includes("//")) {
+    throw pathError(path);
   }
 }
 
 function buildUrl(path: string, query?: RequestOptions["query"]): string {
   const u = new URL(path, BASE_URL);
+  if (u.origin !== API_ORIGIN || !u.pathname.startsWith("/v1/")) throw pathError(path);
   for (const [k, v] of Object.entries(query ?? {})) if (v !== undefined) u.searchParams.set(k, String(v));
   return u.toString();
 }

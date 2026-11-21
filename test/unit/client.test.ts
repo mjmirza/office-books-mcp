@@ -99,6 +99,29 @@ test("rejects paths that leave the API", async () => {
   assert.equal(s.calls.length, 0);
 });
 
+test("rejects percent-encoded dot segments", async () => {
+  const s = stubFetch([]);
+  const c = createClient({ apiKey: "k", fetch: s.fetch, ...noWait });
+  for (const path of ["/v1/foo/%2e%2e/%2e%2e/admin", "/v1/%2E%2E/admin", "/v1/contacts/%2e%2e/profile", "/v1/contacts/%ZZ"]) {
+    await assert.rejects(c.request("GET", path), /must start with \/v1\//);
+  }
+  assert.equal(s.calls.length, 0);
+});
+
+test("a 406 reports rejected request data", async () => {
+  const s = stubFetch([json(406, { message: "Validation failed", details: [{ field: "size", violation: "MIN" }] })]);
+  const c = createClient({ apiKey: "secret-key-xyz", fetch: s.fetch, ...noWait });
+  await assert.rejects(c.request("GET", "/v1/articles"), (e: unknown) => {
+    assert.ok(e instanceof LexwareApiError);
+    assert.equal(e.status, 406);
+    assert.match(e.message, /rejected the request data/);
+    assert.doesNotMatch(e.message, /content type/i);
+    assert.doesNotMatch(e.message, /secret-key-xyz/);
+    assert.match(JSON.stringify(e.details), /MIN/);
+    return true;
+  });
+});
+
 test("returns raw bytes for binary file downloads", async () => {
   const s = stubFetch([new Response(new Uint8Array([37, 80, 68, 70]), { status: 200, headers: { "content-type": "application/pdf" } })]);
   const c = createClient({ apiKey: "k", fetch: s.fetch, ...noWait });

@@ -88,6 +88,19 @@ test("list_vouchers accepts the 'unchecked' status (Lexware changelog 2024-08-01
   assert.equal(tool("list_vouchers").input.safeParse({ voucherType: ["purchaseinvoice"], voucherStatus: ["unchecked"] }).success, true);
 });
 
+test("voucher dates must be real calendar days", () => {
+  const input = tool("list_vouchers").input;
+  const base = { voucherType: ["invoice"], voucherStatus: ["open"] };
+  assert.equal(input.safeParse({ ...base, voucherDateFrom: "2026-11-21" }).success, true);
+  assert.equal(input.safeParse({ ...base, voucherDateFrom: "2024-02-29" }).success, true);
+  assert.equal(input.safeParse({ ...base, voucherDateFrom: "2000-02-29" }).success, true);
+  for (const voucherDateFrom of ["2026-02-31", "2023-02-29", "1900-02-29", "2026-13-01", "2026-00-10"]) {
+    const parsed = input.safeParse({ ...base, voucherDateFrom });
+    assert.equal(parsed.success, false, voucherDateFrom);
+    if (!parsed.success) assert.match(parsed.error.message, /yyyy-MM-dd/);
+  }
+});
+
 test("get_reference_data only reaches the four reference endpoints", async () => {
   const r = recorder();
   await tool("get_reference_data").run(r.client, { kind: "posting_categories" });
