@@ -6,7 +6,7 @@
 
 Ask your AI assistant about your Lexware Office books, safely.
 
-![License](https://img.shields.io/badge/license-source--available-orange) ![Node](https://img.shields.io/badge/node-%3E%3D22-339933?logo=nodedotjs&logoColor=white) ![MCP](https://img.shields.io/badge/MCP-server-000000) ![Status](https://img.shields.io/badge/status-read--only%20preview-yellow) ![Tests](https://img.shields.io/badge/tests-30%20unit%20%2B%2014%20live-2ea44f)
+![License](https://img.shields.io/badge/license-source--available-orange) ![Node](https://img.shields.io/badge/node-%3E%3D22-339933?logo=nodedotjs&logoColor=white) ![MCP](https://img.shields.io/badge/MCP-server-000000) ![Status](https://img.shields.io/badge/status-read--only%20preview-yellow) ![Tests](https://img.shields.io/badge/tests-38%20unit%20%2B%2014%20live-2ea44f)
 
 [Star](https://github.com/mjmirza/office-books-mcp) &nbsp;|&nbsp; [Sponsor](https://github.com/sponsors/mjmirza) &nbsp;|&nbsp; [Follow on GitHub](https://github.com/mjmirza) &nbsp;|&nbsp; [next8n.com](https://next8n.com)
 

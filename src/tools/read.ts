@@ -14,7 +14,18 @@ export interface ReadTool {
 const uuid = z.guid().describe("Lexware resource id (UUID)");
 const page = z.number().int().min(0).optional().describe("0-based page index");
 const size = z.number().int().min(1).max(250).optional().describe("Page size, 1 to 250, Lexware default 25");
-const day = z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Use yyyy-MM-dd");
+// The regex is what clients see in the schema. The refine rejects 2026-02-31 and other days that are not on the calendar.
+function isCalendarDay(value: string): boolean {
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
+  if (!match?.[1] || !match[2] || !match[3]) return false;
+  const year = Number(match[1]);
+  const month = Number(match[2]);
+  const date = Number(match[3]);
+  const parsed = new Date(Date.UTC(year, month - 1, date));
+  return parsed.getUTCFullYear() === year && parsed.getUTCMonth() === month - 1 && parsed.getUTCDate() === date;
+}
+
+const day = z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Use yyyy-MM-dd").refine(isCalendarDay, "Use a real calendar date, yyyy-MM-dd");
 
 const RO = { readOnlyHint: true, openWorldHint: true } as const;
 
