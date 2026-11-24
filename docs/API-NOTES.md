@@ -12,6 +12,7 @@ Checked against https://developers.lexware.io/docs/ on 2026-11-13. Re-check befo
 | Generic file download (phase 2) | `/v1/files/{id}` for bookkeeping vouchers only | Using it for sales voucher documents, deprecated |
 | Voucher status | Includes `unchecked` (2024-08-01). Updating an unchecked voucher may only move it to `open` (2026-07-14) | |
 | Date filters | `createdDateTo` and `updatedDateTo` are inclusive since 2026-08-11 | |
+| Search text | Contact `name` and `email`, and voucherlist `voucherNumber`, send `&`, `<` and `>` as `&amp;`, `&lt;` and `&gt;` before URL encoding. Lexware stores those characters that way (documented example: `johnson & partner` → `name=johnson%20%26amp%3B%20partner`) | Sending the raw character on those filters, which returns no match. Other endpoints, including articles, must not get this encoding |
 | Small business revenue category | `f5c7fee8-f184-4e7a-ab04-8f7e7ad6c207` since 2026-04-28. Read categories from `get_reference_data`, never hardcode | Old id `7a1efa0e-6283-4cbf-9583-8e88d3ba5960` |
 
 ## Limits found live

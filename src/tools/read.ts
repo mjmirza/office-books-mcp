@@ -1,5 +1,6 @@
 import { z } from "zod";
 import type { LexwareClient } from "../api/client.js";
+import { lexwareSearchText } from "../api/search-text.js";
 
 export interface ReadTool {
   name: string;
@@ -91,7 +92,15 @@ export const readTools: ReadTool[] = [
     },
     run: (c, a) =>
       c.request("GET", "/v1/contacts", {
-        query: { page: a.page, size: a.size, name: a.name, email: a.email, number: a.number, customer: a.customer, vendor: a.vendor },
+        query: {
+          page: a.page,
+          size: a.size,
+          name: lexwareSearchText(a.name),
+          email: lexwareSearchText(a.email),
+          number: a.number,
+          customer: a.customer,
+          vendor: a.vendor,
+        },
       }),
   }),
   def({
@@ -150,7 +159,7 @@ export const readTools: ReadTool[] = [
           contactId: a.contactId,
           voucherDateFrom: a.voucherDateFrom,
           voucherDateTo: a.voucherDateTo,
-          voucherNumber: a.voucherNumber,
+          voucherNumber: lexwareSearchText(a.voucherNumber),
           page: a.page,
           size: a.size,
         },
